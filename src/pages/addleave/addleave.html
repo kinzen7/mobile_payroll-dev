@@ -1,0 +1,260 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button (click)="closemodal()">
+        <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title style="text-align: center;"> เพิ่มบันทึกการลา </ion-title>
+
+  </ion-navbar>
+
+  <!-- ************************** -->
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="menu">
+      <ion-segment-button value="add">
+        เพิ่มบันทึก
+      </ion-segment-button>
+      <ion-segment-button value="remain">
+        สิทธิคงเหลือ
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<!-- ****************************************************************************** -->
+
+<ion-content padding>
+  <!-- Segment in content -->
+
+  <div [ngSwitch]="menu">
+    <ion-list *ngSwitchCase="'add'">
+      <P style="margin-bottom: 0px;margin-top: 0px;">ประเภทการลา</P>
+      <ion-item>
+        <div class="alert-head">
+          <h2 class="alert-title" id="alert-hdr-1">ประเภทการลา</h2>
+          <ion-label>ประเภทการลา</ion-label>
+        </div>
+
+        <ion-select [(ngModel)]="insertData.type" (ngModelChange)="checkleave()">
+          <ion-option value="ลากิจ">ลากิจ</ion-option>
+          <ion-option value="ลาป่วย">ลาป่วย</ion-option>
+          <ion-option value="ลาพักร้อน">ลาพักร้อน</ion-option>
+          <ion-option value="ลาคลอด">ลาคลอด</ion-option>
+          <ion-option value="ลาบวช">ลาบวช</ion-option>
+          <ion-option value="ลาทำหมัน">ลาทำหมัน</ion-option>
+          <ion-option value="ลาหยุดชดเชย">ลาหยุดชดเชย</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <P>รายละเอียดของรายการ</P>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="md-calendar"></ion-icon>
+          <!--{{datenow | date: 'dd/MM/yyyy'}}-->
+        </ion-label>
+        <ion-datetime displayFormat=" D MMMM YYYY เวลา HH" pickerFormat="D MMM YYYY HH" [(ngModel)]="insertData.startdate"
+        [disabled]="calendar"  placeholder="วันและเวลาเริ่มต้น" (ngModelChange)="checkfromdate()" style="font-size:14px;">
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon name="md-calendar"></ion-icon>
+        </ion-label>
+        <ion-datetime displayFormat=" D MMMM YYYY เวลา HH" pickerFormat="D MMM YYYY HH" [(ngModel)]="insertData.enddate"
+        [disabled]="calendar"  placeholder="วันและเวลาสิ้นสุด" (ngModelChange)="checkdate()" style="font-size:14px;">
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-row text-center>
+          <ion-col style="text-align: left;">
+            <h5>ลาทั้งหมด</h5>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <h5 style="color: #48adff;">{{day}} วัน {{hour}} ชั่วโมง {{minute}} นาที</h5>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon name="ios-document-outline"></ion-icon>
+        </ion-label>
+        <ion-textarea [(ngModel)]="insertData.comment" placeholder="กรุณากรอกเหตุผล"></ion-textarea>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 *ngIf="photos; let id = index">
+            <ion-card class="releative">
+              <ion-icon ios="ios-add-circle" md="md-add-circle" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+              <img [src]="photos" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div style="text-align:center;">
+        <button ion-button color="dark" style="width: 232px;height: 40px;margin-top: 30px;" (click)="takePhoto()">เพิ่มรูป</button>
+      </div>
+      <div style="text-align:center;">
+        <button ion-button color="secondary" style="width: 232px;height: 40px;" [disabled]="button" (click)="showConfirm()">บันทึก</button>
+      </div>
+
+    </ion-list>
+
+    <!-- ************************************************ -->
+
+    <ion-list *ngSwitchCase="'remain'">
+      <!-- ในหน้า "สิทธิคงเหลือ" จะมีอะไรบ้าง -->
+      <P style="margin-top: 0px;">ผู้อนุมัติรายการ</P>
+      <ion-item>
+        <ion-row>
+          <ion-col col-3>
+            <ion-icon name="md-person" style="font-size: 50px;color: #48adff;"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <p>ฝ่ายบุคคล</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <p>นางสาวแสนดี ที่สุด</p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <P>วันลาคงเหลือ (ต่อปี)</P>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาป่วย</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6> &nbsp;&nbsp;7 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาป่วย</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>30 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาพักร้อน</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>&nbsp;&nbsp;5 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาคลอด</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>90 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาบวช</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>15 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาทำหมัน</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>20 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <h6>ลาหยุดชดเชย</h6>
+        </ion-col>
+
+        <ion-col col-3>
+          <h6>&nbsp;&nbsp;0 วัน</h6>
+        </ion-col>
+
+        <ion-col col-4>
+          <h6>0 ชั่วโมง</h6>
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row>
+          <ion-col col-3>          
+            <h6>ลาพักร้อน</h6>
+          </ion-col>
+
+          <ion-col col-2 style="text-align: right;">
+            <h6>30</h6>
+          </ion-col>  
+
+          <ion-col col-2>
+            <h6>วัน</h6>
+          </ion-col>
+
+          <ion-col col-2 style="text-align: right;">
+            <h6>0</h6>
+          </ion-col>
+
+          <ion-col col-3>
+            <h6>ชั่วโมง</h6>
+          </ion-col>
+        </ion-row> -->
+
+    </ion-list>
+  </div>
+</ion-content>

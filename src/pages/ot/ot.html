@@ -1,0 +1,276 @@
+<ion-header>
+
+  <ion-navbar hideBackButton> 
+      <ion-buttons left>
+          <button ion-button (click)="dismiss()">
+            <ion-icon name="ios-arrow-back" style="color: #ffffff;"></ion-icon>
+          </button>
+        </ion-buttons>
+      <!-- <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>   -->
+
+    <ion-title style="text-align: center;"> ส่งคำขอ OT </ion-title>    
+  </ion-navbar> 
+  
+  <!-- ************************** -->
+ <ion-toolbar no-border-top>         
+    <ion-segment [(ngModel)]="menu" (ionChange)="load_query()">                
+          <ion-segment-button value="request">
+            ส่งคำขอ OT
+          </ion-segment-button>                
+          <ion-segment-button value="status">
+            สถานะคำขอ
+          </ion-segment-button>
+          <!-- <ion-segment-button value="cancel">
+            ยกเลิกคำขอ
+          </ion-segment-button> -->
+          <ion-segment-button value="approve" *ngIf=isManagement>
+            คำขอถึงคุณ
+          </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="menu">  
+     
+      <ion-list *ngSwitchCase="'request'">          
+        <ion-item>
+          <ion-label>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-label>
+          <ion-input disabled="false" placeholder="เลือกวันที่" (click)="openCalendar()" value="{{otim_date_disp}}"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label style="float:left">
+            <ion-icon name="time"></ion-icon>
+          </ion-label><ion-label>จากเวลา</ion-label>
+          <ion-input type="time" disabled="false" [(ngModel)]="insertData.time_from"></ion-input>
+                <!-- <ion-icon name="time"></ion-icon><ion-label style="float:right">ถึง</ion-label>
+              <ion-input type="time" disabled="false" [(ngModel)]="insertData.time_to"></ion-input> -->
+        </ion-item>
+        
+        <ion-item>
+            <ion-label style="float:left">
+            <ion-icon name="time"></ion-icon></ion-label>
+            <ion-label style="float:right">ถึงเวลา</ion-label>
+            <ion-input type="time" disabled="false" [(ngModel)]="insertData.time_to"></ion-input>
+        </ion-item>
+
+        <!-- <ion-item (click)="calc_ot_amnt()"> สำหรับปุ่มเลือกคำนวณ ot
+            <div class="row">
+                <div class="col">
+                  <label class="item item-icon-left item-radio" style="border: none">
+                    <input type="radio" name="group" [(ngModel)]="insertData.rate" value="syst"> ใช้ค่าจากระบบ
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                </div>
+                <div class="col">
+                  <label class="item item-icon-left item-radio" style="border: none">
+                    <input type="radio" name="group" [(ngModel)]="insertData.rate" value="manu"> กำหนดเอง
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                </div>
+                
+              </div>
+        </ion-item>   -->
+        <!-- *ngIf="insertData.rate =='syst'" เงื่อนไขโชว์ช่องคำนวณ--> 
+        
+        <!-- <ion-item >
+          <ion-label>
+            <ion-icon name="logo-usd"></ion-icon>
+          </ion-label>
+          <ion-input  disabled="true" value="เงินที่ได้ {{!insertData.requ_hour ? '0' : insertData.requ_hour*200}} บาท."></ion-input>
+        </ion-item> -->
+        
+<!--  เอาออกเพราะใช้ fix rate 200
+        <ion-item *ngIf="insertData.rate =='manu'">
+            <ion-label>
+              <ion-icon name="logo-usd"></ion-icon>
+            </ion-label>
+            <ion-input  disabled="false" placeholder="ระบุจำนวนเงินที่ต้องการ" [(ngModel)]="insertData.requ_amnt"></ion-input>
+          </ion-item> -->
+
+        <ion-item>
+          <ion-label>
+            <ion-icon name="chatbubbles"></ion-icon>
+          </ion-label>
+          <ion-input type="text"  placeholder="หมายเหตุ" [(ngModel)]="insertData.otim_note"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-col width-50 offset-25 style="text-align: center">
+                <button ion-button icon-right (click)="showConfirm()">
+                    ส่ง
+                    <ion-icon name="mail"></ion-icon>
+                  </button>
+            </ion-col>
+          </ion-row>
+      </ion-list>
+      <ion-list *ngSwitchCase="'status'">
+          <p style="color:#d75a4a;margin-bottom: 10px;margin-top: 10px; margin-left: 16px;font-size: 10px;">
+              * ข้อมูลย้อนหลังไม่เกิน 1 เดือน
+            </p>
+        <ion-list-header style="background-color: #f0eff5;">
+          รายการที่รออนุมัติ
+        </ion-list-header>
+      
+        <div *ngFor="let data of datas_waiting" (click)="clickItem(data)">
+          <ion-item>
+            <ion-row>
+              <ion-col col-3>
+                <ion-icon name="md-alarm" style="font-size: 80px;color: #48adff;"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                    <h6>วันที่ {{data?.OTIM_DATE_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6>ขอ {{data?.REQU_HOUR}} ชั่วโมง</h6>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6>เป็นเงิน {{data.REQU_HOUR * 200}} บาท</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+      
+      
+        <ion-list-header style="background-color: #f0eff5;">
+          รายการที่อนุมัติแล้ว
+        </ion-list-header>
+        <div *ngFor="let data of datas_approved" (click)="clickItem(data)">
+          <ion-item >
+            <ion-row>
+              <ion-col col-3>
+                <ion-icon name="md-checkmark-circle" style="font-size: 80px;color: #0b9408;"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                    <h6>วันที่ {{data?.OTIM_DATE_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6>ขอ {{data?.REQU_HOUR}} ชั่วโมง</h6>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6>อนุมัติ {{data.OTIM_HOUR}} ชั่วโมง</h6>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <h6>เป็นเงิน {{data?.OTIM_AMNT}} บาท</h6>
+                      </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+      
+        <ion-list-header style="background-color: #f0eff5;">
+          รายการที่ถูกปฏิเสธ
+        </ion-list-header>
+        <div *ngFor="let data of datas_reject" (click)="clickItem(data)">
+          <ion-item>
+            <ion-row>
+              <ion-col col-3>
+                <ion-icon name="md-close-circle" style="font-size: 80px;color: #d75a4a;"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                    <h6>วันที่ {{data?.OTIM_DATE_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6>ขอ {{data?.REQU_HOUR}} ชั่วโมง</h6>
+                  </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+                    <ion-col>
+                      <h6>อนุมัติ 0 ชั่วโมง</h6>
+                    </ion-col>
+                  </ion-row> -->
+                <ion-row>
+                  <ion-col>
+                      <h6>เป็นเงิน {{data.REQU_HOUR * 200}} บาท</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+      </ion-list>
+
+      <!-- <ion-list *ngSwitchCase="'cancel'">
+<div *ngFor="let data of datas">
+          <ion-card class="waiting" (click)="presentConfirm(data)" *ngIf="data.ot_stat == 'W'">
+              <ion-item class="waiting">
+                <ion-label style="text-align: center;">
+                  วันที่ส่ง
+                </ion-label>
+                <ion-label style="text-align: center;">
+                  (ขอ)ชั่วโมง
+                </ion-label>
+                <ion-label style="text-align: center;">
+                  (อนุมัติ)ชั่วโมง
+                </ion-label>
+              </ion-item>
+              <ion-item class="waiting"> 
+                  <ion-label style="text-align: center;" >{{data?.ot_date}}</ion-label>
+                  <ion-label style="text-align: center;" >{{data?.ot_time}}</ion-label>
+                  <ion-label style="text-align: center;" >{{!data.ot_appv_hour ? '0' : data.ot_appv_hour }}</ion-label>
+                  <ion-label style="text-align: center;" *ngIf="!!data.ot_appv_hour">{{data?.ot_appv_hour}}</ion-label>
+              </ion-item>
+            </ion-card>
+          </div>
+
+      </ion-list> -->
+
+
+      <ion-list *ngSwitchCase="'approve'">
+          
+        <div *ngFor="let data of reqe_datas" (click)="ot_admin(data)">
+          <ion-item>
+            <ion-row>
+              <ion-col col-3>
+                  <img src="http://payroll.ahost-cs.com/uploads/{{data?.MOBI_SEQE}}.jpg" onError="this.src='assets/img/no-image.jpg'">
+                <!-- <ion-icon name="md-alarm" style="font-size: 80px;color: #48adff;"></ion-icon> -->
+              </ion-col>
+              <ion-col>
+                  <ion-row>
+                      <ion-col>
+                        <h6>จาก {{data?.TFST_NAME}} {{data?.TLST_NAME}}</h6>
+                      </ion-col>
+                    </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6>วันที่ {{data?.OTIM_DATE_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6>ขอ {{data?.REQU_HOUR}} ชั่วโมง</h6>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6>เหตุผล {{data.OTIM_NOTE}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+      </ion-list>
+    
+  </div>
+</ion-content>

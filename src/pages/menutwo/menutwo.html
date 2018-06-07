@@ -1,0 +1,75 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title style="text-align: center;">TA</ion-title>    
+    </ion-navbar>
+  
+  </ion-header>
+
+<ion-content>
+  <!-- <div>
+     <ion-card>
+      <agm-map
+        [latitude]="lat"
+        [longitude]="lon"
+        [zoom]="15"
+        [disableDefaultUI]="false"
+        [zoomControl]="false"
+        [streetViewControl]="false">
+  
+        <agm-marker
+          [latitude]="lat"
+          [longitude]="lon">
+
+            <agm-info-window>
+               <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true"> -->
+                <!-- <ng-template> -->
+                <!--  <strong>A-Host</strong>
+                 </ng-template> -->
+              <!-- </agm-snazzy-info-window> -->
+          <!--  </agm-info-window>
+
+        </agm-marker>
+      </agm-map>
+
+      <ion-list>
+        <ion-item>
+          Latitude : {{lat}}
+        </ion-item>
+    
+      <ion-item >
+        Longitude : {{lon}}
+      </ion-item>
+    </ion-list>
+  
+    </ion-card>
+  
+  </div>
+  -->
+  <ion-card>
+  <div class="col col-50 div" style="border-width: 0px; border-style: none;text-align:center;">  
+     <ion-datetime displayFormat="DD MMMM YYYY" [(ngModel)]="time"></ion-datetime>
+  </div>
+
+  <div ng-app="myApp" ng-controller="myCtrl" class="col col-50 div" style="border-width: 0px; border-style: none;text-align:center;"> 
+    {{theTime}}
+  </div>
+  </ion-card>
+
+
+
+<div class="col col-50 div"  (click)="fingerauth()">
+      <ion-item class="item item-image" style="border-width: 0px; border-style: none;text-align:center;">
+        <button ion-button color="secondary">เข้างาน</button> 
+      </ion-item>
+</div>
+
+ <div class="col col-50 " style="padding-top:20px;" (click)="open_dt()">
+    <ion-item class="item item-image" style="border-width: 0px; border-style: none;text-align:center;">
+      <button ion-button color="light">ดูเวลาเข้า-ออกงาน</button>  
+    </ion-item>
+  </div>
+
+
+  
+</ion-content>

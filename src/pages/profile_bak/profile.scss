@@ -1,0 +1,29 @@
+page-profile {
+
+        ion-item{
+            border-bottom-width: 1px;
+            height: 10px;
+        }
+        .foot{
+            height:50px;
+            //position:fixed;
+            left:0px;
+            bottom:0px;
+            text-align:center;
+            width:100%;
+            z-index: 99;
+            color: #fff;
+            text-decoration: underline;        
+        }
+        .profile-pic{
+            text-align:center;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }  
+        ion-card img {
+            /* display: block; */
+            width: 50%;
+            align-items: center;
+        } 
+
+}

@@ -1,0 +1,48 @@
+<ion-content padding class = "registartion" style="background-color:#179ceb;">
+  <div align = center>
+    <br><br>
+    <img src = "assets/logohrb2.png">
+    <br><br>
+  </div>
+  <ion-list>
+    <!-- <ion-item>
+      <ion-label style="color:#ffffff;" color="light">HWID: {{uuid}}</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label style="color:#ffffff;" color="light">โทเคน: </ion-label>
+      <ion-input type="text" value={{takenid}} [(ngModel)]="insertData.mobi_token"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="color:#ffffff;" color="light">อีเมลล์: </ion-label>
+      <ion-input type="email" [(ngModel)]="insertData.empl_emai" ></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label style="color:#ffffff;" color="light">รหัสผ่าน: </ion-label>
+        <ion-input type="password" [(ngModel)]="insertData.password" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label style="color:#ffffff;" color="light">ยืนยันรหัสผ่าน: </ion-label>
+          <ion-input type="password" [(ngModel)]="insertData.confirm_password" ></ion-input>
+        </ion-item>
+    <!-- <div> >>>> Number only [type="number" pattern="[0-9]*"]
+      <p style="color:#ffffff;font-size:16px;text-align:center;">HW_ID: {{uuid}}</p>
+    </div>   <div>
+      <p style="color:#ffffff;font-size:16px;text-align:center;">Player_ID: {{play_id}}</p>
+    </div> -->
+    <!-- <ion-item>
+      <ion-label style="color:#ffffff;" color="light">รหัสพนักงาน : </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item> -->
+    <!-- <ion-item>
+      <ion-label style="color:#ffffff;" color="light">เลขบัตรประชาชน : </ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item> -->
+  </ion-list>
+  <div align = center>
+  <ion-buttons>
+  <button ion-button block style="color:#179ceb;" color="light" full (click)="showConfirm()">ลงทะเบียน </button>  
+  <!-- <button ion-button block style="color:#179ceb;" color="light" full>ยกเลิก </button>    -->
+  </ion-buttons>
+  </div>
+</ion-content>

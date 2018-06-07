@@ -1,0 +1,22 @@
+{    
+    "_comment":"Login Page",
+	"txt_email":"อีเมลล์",
+	"txt_password":"รหัสผ่าน",
+    "btn_loggin":"เข้าสู่ระบบ",
+	"btn_forgot_password":"ลืมรหัสผ่าน?",
+	"btn_tutorial":" คู่มือการใช้งาน",
+	"txt_change_lang":"เปลี่ยนภาษา",
+		
+	"_comment":"Home Page",
+	"btn_ta":"ลงเวลางาน",
+	"btn_ot":"โอที",
+	"btn_leave":"ลา",
+	"btn_service_rec":"บันทึกบริการ",
+	"btn_allowance":"ภาษี",
+	"btn_ann":"ประกาศ",
+	"btn_payslip":"เงินเดือน",
+	"btn_report":"รายงาน",
+	"btn_help":"ช่วยเหลือ",
+    "title":"ตั้งค่า",
+    "title2":"ลา"
+}

@@ -1,0 +1,132 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-title class="toolbar-title-ios">
+        <p style="color: #ffffff;">รายละเอียด</p>
+      </ion-title>      
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+      <img src="http://payroll.ahost-cs.com/uploads/{{detailOt?.MOBI_SEQE}}.jpg" onError="this.src='assets/img/no-image.jpg'" style="  border-radius: 50%;
+      height: 125px;
+      width: 125px;
+      z-index: 10;
+      margin-top:70px;
+      margin-bottom: -80px;
+      position: relative;
+      left:50%;
+      margin-right:-50%;
+      transform: translate(-50%,-50%);
+      align-content: center;
+      ">
+    <ion-list>
+        <ion-item style="padding-left: 0px;border-top-width: 0px;">           
+          <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+             <p>วันที่:</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+             <p style="color:#333;">{{detailOt.OTIM_DATE_DISP * 1000 | date:'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+  
+          <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+             <p>จำนวนชั่วโมง:</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+             <p style="color:#333;">{{detailOt.REQU_HOUR}} ชั่วโมง</p>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row style=" text-align:center;">
+              <ion-col col-6 style="text-align: right;">             
+               <p>จำนวนเงิน:</p>
+              </ion-col>
+              <ion-col col-6 style="text-align: left;">             
+               <p style="color:#333;">{{!detailOt.REQU_AMNT ? 'ไม่ได้กำหนด' : detailOt.REQU_AMNT}} {{!detailOt.REQU_AMNT ? '' : 'บาท'}}</p>
+              </ion-col>
+            </ion-row>
+  
+          <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+            <p>เหตุผล:</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+            <p style="color:#333;">{{detailOt.OTIM_NOTE}}</p>
+            </ion-col>
+          </ion-row>
+  
+          <!-- <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+             <p>รวม</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+             <p style="color:#333;">4 ชั่วโมง</p>
+            </ion-col>
+          </ion-row>
+  
+          <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+             <p>เพิ่มรายการวันที่</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+             <p style="color:#333;">{{detailOt.ot_time_stamp}}</p>
+            </ion-col>
+          </ion-row> -->
+  
+          <!-- <ion-row style=" text-align:center;">
+            <ion-col col-6 style="text-align: right;">             
+             <p>สถานะ</p>
+            </ion-col>
+            <ion-col col-6 style="text-align: left;">             
+             <p style="color:#333;">{{detailOt.STATUS == '1' ? 'รออนุมัติ' : detailOt.ot_stat == 'A' ? 'อนุมัติแล้ว' : 'ถูกปฏิเสธ'}}</p>              
+            </ion-col>
+          </ion-row>         -->
+        </ion-item>  
+               
+        <ion-item style="padding-left: 0px;"> 
+          <p style="font-size: 18px;">ส่งจาก</p>
+  
+            <!-- <ion-row> 
+              <ion-col col-3> <p> ผู้อนุมัติ </p> </ion-col>                      
+              <ion-col> <p style="color:#333;"> MANAGEMENT </p> </ion-col>           
+            </ion-row> -->
+  
+            <ion-row>
+              <ion-col col-3>  </ion-col>  
+              <ion-col> <p style="color:#333;">{{detailOt.TFST_NAME}} {{detailOt.TLST_NAME}}</p></ion-col>
+            </ion-row>  
+  
+        </ion-item>
+
+          <!-- <div [hidden]="!statusClick"> -->
+            <ion-row>
+              <p style="color:red;font-size: 18px;">* </p> <p style="font-size: 18px;"> หมายเหตุ</p>
+            </ion-row>
+            <ion-textarea placeholder="หมายเหตุ" style="margin-left: 20px;" [(ngModel)]="detailOt.APPV_NOTE"></ion-textarea>
+          <!-- </div> -->
+  
+          <div style="text-align:center;"> 
+            <ion-row>
+              <ion-col>
+                  <button ion-button color="danger" style="width: 100;height: 40px;" (click)="showConfirm()">ปฏิเสธคำร้อง</button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button color="secondary" style="width: 100px;height: 40px;" (click)="presentPrompt(detailOt)">อนมุัติคำร้อง</button>
+              </ion-col>
+            </ion-row>   
+          </div>
+        
+
+
+  
+    </ion-list>
+  </ion-content>

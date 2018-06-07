@@ -1,0 +1,249 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="closemodal()">
+        <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title style="text-align: center;"> รายละเอียดการลงเวลางาน </ion-title>
+  </ion-navbar>
+
+  <!-- ************************** -->
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="menu">
+      <ion-segment-button value="all">
+        ล่าสุด
+      </ion-segment-button>
+      <ion-segment-button value="week">
+        สัปดาห์
+      </ion-segment-button>
+      <ion-segment-button value="mounth">
+        เดือน
+      </ion-segment-button>
+      <ion-segment-button value="year">
+        ปี
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="menu">
+
+    <ion-list *ngSwitchCase="'all'">
+      <!-- Header -->
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            วันที่
+          </ion-col>
+          <ion-col>
+            ชั่วโมง
+          </ion-col>
+          <ion-col>
+            สถานที่
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          รวมทั้งหมด
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'week'">
+            <!-- Header -->
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            วันที่
+          </ion-col>
+          <ion-col>
+            ชั่วโมง
+          </ion-col>
+          <ion-col>
+            สถานที่
+          </ion-col>
+        </ion-row>
+      </ion-item>
+           <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+                 <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+                 <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+                 <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+                 <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          รวมทั้งหมด
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>    
+      </ion-list>
+
+    <ion-list *ngSwitchCase="'mounth'">
+            <!-- Header -->
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            วันที่
+          </ion-col>
+          <ion-col>
+            ชั่วโมง
+          </ion-col>
+          <ion-col>
+            สถานที่
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+            <ion-row>
+        <ion-col>
+          26 ต.ค. 60 08.30 PM - 17.30 PM
+        </ion-col>
+        <ion-col>
+          8.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          รวมทั้งหมด
+        </ion-col>
+        <ion-col>
+          8.0
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'year'">
+            <!-- Header -->
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            วันที่
+          </ion-col>
+          <ion-col>
+            ชั่วโมง
+          </ion-col>
+          <ion-col>
+            สถานที่
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          25 ต.ค. 60 12.30 PM - 12.30 PM
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+          แม่น้ำเจ้าพระยา
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          รวมทั้งหมด
+        </ion-col>
+        <ion-col>
+          0.0
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+  </div>
+
+</ion-content>

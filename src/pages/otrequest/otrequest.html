@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar color="nav">
+    <ion-buttons left>
+      <button ion-button (click)="closemodal()">
+        <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">เพิ่มบันทึก OT</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <P>รายละเอียดของรายการ</P>
+  <ion-item>
+    <ion-label>
+      <ion-icon name="md-calendar"></ion-icon>
+    </ion-label>
+    <ion-datetime displayFormat="จากวันที่ D MMMM YYYY เวลา HH" pickerFormat="D MMM YYYY HH" [(ngModel)]="insertData.startdate"
+      placeholder="วันและเวลาเริ่มต้น" (ngModelChange)="checkfromdate()"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <ion-icon name="md-calendar"></ion-icon>
+    </ion-label>
+    <ion-datetime displayFormat="ถึงวันที่ D MMMM YYYY เวลา HH" pickerFormat="D MMM YYYY HH" [(ngModel)]="insertData.enddate"
+      placeholder="วันและเวลาสิ้นสุด" (ngModelChange)="checkdate()"></ion-datetime>
+  </ion-item>
+
+
+
+  <div style="text-align:center;">
+    <button ion-button color="secondary" style="width: 232px;height: 40px;margin-top: 25px;" [disabled]="button" (click)="showConfirm()">บันทึก</button>
+  </div>
+</ion-content>

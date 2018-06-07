@@ -1,0 +1,110 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="ios-arrow-back" style="color: #ffffff;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title style="text-align:center;">
+      แก้ไขข้อมูลลดหย่อนภาษี
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="choice">
+      <ion-segment-button value="puppies">
+        ผู้มีเงินได้
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        คู่สมรส
+      </ion-segment-button>
+      <ion-segment-button value="ducklings">
+        ลดหย่อนอื่นๆ
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-card>
+  <ion-item>
+      <ion-label>พิมพ์ ภ.ง.ด.91</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>หักลดหย่อนคู่สมรสมีชีวิตอยู่และไม่มีเงินได้</ion-label>
+      <ion-checkbox ></ion-checkbox>
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+  <ion-list>
+      <ion-item-group>
+          <button ion-item (click)="onButtonClick()"><b>ลดหย่อนบุตร (คนละ 30,000 บาท)</b></button>
+          <ion-item *ngIf="buttonClicked">
+              <ion-label style="font-size:14px">บุตรคนที่1: </ion-label>
+              <ion-input type="text" style="font-size:14px" placeholder="เลขบัตรประชาชน"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="buttonClicked">
+                <ion-label style="font-size:14px">บุตรคนที่2: </ion-label>
+                <ion-input type="text" style="font-size:14px" placeholder="เลขบัตรประชาชน"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="buttonClicked">
+                  <ion-label style="font-size:14px">บุตรคนที่3: </ion-label>
+                  <ion-input type="text" style="font-size:14px" placeholder="เลขบัตรประชาชน"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <ion-label style="font-size:14px">บุตรคนที่4: </ion-label>
+                    <ion-input type="text" style="font-size:14px" placeholder="เลขบัตรประชาชน"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="buttonClicked">
+                      <ion-label style="font-size:14px">บุตรคนที่5: </ion-label>
+                      <ion-input type="text" style="font-size:14px" placeholder="เลขบัตรประชาชน"></ion-input>
+                    </ion-item>
+                    <!-- <ion-item *ngIf="buttonClicked">
+                        <ion-label style="font-size:14px">บุตรคนที่6: </ion-label>
+                        <ion-input type="text" placeholder="เลขบัตรประชาชน"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="buttonClicked">
+                          <ion-label style="font-size:14px">บุตรคนที่7: </ion-label>
+                          <ion-input type="text" placeholder="เลขบัตรประชาชน"></ion-input>
+                        </ion-item> -->
+        </ion-item-group>
+        
+        <ion-item-group>
+  <button ion-item (click)="onButton2Click()">
+     <b> ลดหย่อนบิดา/มารดา</b>
+    </button>
+     <ion-item *ngIf="button2Clicked">
+        <ion-label style="font-size:14px"><u>เลขบัตรบิดา: </u></ion-label>
+        <ion-label style="font-size:14px">ค่าเดิม:</ion-label>
+        <ion-label style="font-size:14px">แก้ไข:</ion-label>
+      </ion-item>
+    
+      <ion-item *ngIf="button2Clicked">
+          <ion-label><p><u>อุปการะเลี้ยงดูมารดา: </u></p></ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="button2Clicked">
+            <ion-label><p><u>เบี้ยประกันสุขภาพบิดา: </u></p></ion-label>
+          </ion-item>
+          <ion-item *ngIf="button2Clicked">
+              <ion-label><p><u>เบี้ยประกันสุขภาพมารดา: </u></p></ion-label>
+            </ion-item>
+  </ion-item-group>
+
+    <button ion-item >
+        <b>ประกัน, LTF, RMF, บริจาค</b>
+      </button>  
+
+
+      <button ion-item >
+          <b>เงินสะสมกองทุน, ประกันสังคม, ดอกเบี้ย</b>
+        </button>
+
+
+        <button ion-item >
+            <b>อุปการะเลี้ยงดู</b>
+          </button>
+</ion-list>
+</ion-card>
+</ion-content>

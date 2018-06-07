@@ -1,0 +1,204 @@
+<ion-header >
+  <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="ios-arrow-back" style="color: #ffffff;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title style="text-align:center;">
+      แก้ไขข้อมูลส่วนตัว
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>         
+      <!-- (ionChange)="load_query()" -->
+    <ion-segment [(ngModel)]="menu" >                
+          <ion-segment-button value="profile">
+            ข้อมูลทั่วไป
+          </ion-segment-button>                
+          <ion-segment-button value="address">
+            ข้อมูลที่อยู่
+          </ion-segment-button>
+          <ion-segment-button value="bank">
+            บัญชีธนาคาร
+          </ion-segment-button>
+          <ion-segment-button value="contact">
+            ข้อมูลการติดต่อ
+          </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content none-line>
+    
+  <ion-list *ngFor="let data of datas">
+
+      <div [ngSwitch]="menu"> 
+          <ion-list *ngSwitchCase="'profile'">  
+              <div style=" background-color:#ffffff;
+              height: 180px;
+              background-size: cover;
+              background-position: center center;
+              margin-bottom: -200px;">
+              
+              </div> 
+             
+         
+              <img src="{{'data:image/png;base64,' + imgAvatar}}" onError="this.src='assets/img/no-image.jpg'" style="  border-radius: 50%;
+                   height: 125px;
+                   width: 125px;
+                   z-index: 10;
+                   margin-top:90px;
+                   margin-bottom: -80px;
+                   position: relative;
+                   left:50%;
+                   margin-right:-50%;
+                   transform: translate(-50%,-50%);
+                   align-content: center;
+                   ">
+               <ion-fab top center edge style="top: 90px;margin-left: 10px;">
+                 <button ion-fab mini (click)="takePhoto()"><ion-icon name="add"></ion-icon></button>
+                 <!-- <ion-fab-list>
+                   <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+                   <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+                   <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+                   <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+                 </ion-fab-list> -->
+               </ion-fab>
+             <div style="margin-top:20px;">
+             <ion-item>
+               <ion-icon name="ios-card-outline" item-start></ion-icon>
+               <ion-label floating>เลขบัตรประชาชน</ion-label>
+               <ion-input type="text" value="{{data?.EMPL_CDID}}" [readonly]=true style="color:rgb(206, 206, 206)"></ion-input>
+             </ion-item>
+         
+             <ion-item>
+               <ion-icon name="ios-person-outline" item-start></ion-icon>
+               <ion-label floating>ชื่อ/สกุล (ไทย)</ion-label>
+               <ion-input type="text" value="{{data?.TPRE_NAME}} {{data?.TFST_NAME}} {{data?.TLST_NAME}}" [readonly]=true style="color:rgb(206, 206, 206)"></ion-input>
+             </ion-item>
+         
+             <ion-item>
+               <ion-icon name="ios-person-outline" item-start></ion-icon>
+               <ion-label floating>ชื่อ/สกุล (อังกฤษ)</ion-label>
+               <ion-input type="text" value="{{data?.EPRE_NAME}} {{data?.EFST_NAME}} {{data?.ELST_NAME}}" [readonly]=true style="color:rgb(206, 206, 206)"></ion-input>
+             </ion-item>
+         
+             <ion-item>
+                 <ion-icon name="ios-calendar-outline" item-start></ion-icon>
+                 <ion-label floating>วันเกิด</ion-label>
+                 <ion-input type="text" value="{{data?.BIRT_DATE_DISP* 1000 | date:'dd/MMM/yyyy'}}" [readonly]=true style="color:rgb(206, 206, 206)"></ion-input>
+               </ion-item>
+                     </div>
+                    </ion-list>
+
+                     <ion-list *ngSwitchCase="'address'">  
+                     <div >
+                        <ion-item>
+                                    <ion-icon name="ios-home-outline" item-start></ion-icon>
+                                    <ion-label floating>เลขที่อยู่/ชื่อที่อยู่</ion-label>
+                                    <ion-textarea type="text" value="{{data?.EMPL_ADD1}}" [(ngModel)]="insertData[0].EMPL_ADD1" [ngModelOptions]="{standalone: true}"></ion-textarea>
+                                  </ion-item>
+                    
+                                  <ion-item>
+                                    <ion-icon name="ios-home-outline" item-start></ion-icon>
+                                    <ion-label floating>ถนน/แขวง/ตำบล </ion-label>
+                                    <ion-input type="text" value="{{data?.EMPL_ADD2}}" [(ngModel)]="insertData[0].EMPL_ADD2" [ngModelOptions]="{standalone: true}"></ion-input>
+                                  </ion-item>
+                    
+                                  <ion-item>
+                                    <ion-icon name="ios-home-outline" item-start></ion-icon>
+                                    <ion-label floating>เขต/อำเภอ/จังหวัด</ion-label>
+                                    <ion-input type="text" value="{{data?.EMPL_ADD3}}" [(ngModel)]="insertData[0].EMPL_ADD3" [ngModelOptions]="{standalone: true}"></ion-input>
+                                  </ion-item>
+                    
+                                  <ion-item>
+                                    <ion-icon name="ios-home-outline" item-start></ion-icon>
+                                    <ion-label floating>รหัสไปรษณีย์</ion-label>
+                                    <ion-input type="text" value="{{data?.POST_CODE}}" [(ngModel)]="insertData[0].POST_CODE" [ngModelOptions]="{standalone: true}"></ion-input>
+                                  </ion-item>
+
+                                  <div padding>
+                                    <button ion-button color="primary" block (click)="show_inbound(4)">บันทึก</button>
+                                  </div>
+
+                     </div>
+            </ion-list>
+
+            <ion-list *ngSwitchCase="'contact'">
+                <ion-item>
+                    <ion-icon name="ios-call-outline" item-start></ion-icon>
+                      <ion-label floating>เบอร์ติดต่อ1</ion-label>
+                      <ion-input type="text" value="{{data?.EMPL_PHO1}}" [(ngModel)]="insertData[0].EMPL_PHO1" [ngModelOptions]="{standalone: true}"></ion-input>
+                    </ion-item>
+            
+                    <ion-item>
+                      <ion-icon name="ios-call-outline" item-start></ion-icon>
+                        <ion-label floating>เบอร์ติดต่อ2</ion-label>
+                        <ion-input type="text" value="{{data?.EMPL_PHO2}}" [(ngModel)]="insertData[0].EMPL_PHO2" [ngModelOptions]="{standalone: true}"></ion-input>
+                      </ion-item>
+                    
+                    <ion-item>
+                        <ion-icon name="ios-phone-portrait-outline" item-start></ion-icon>
+                        <ion-label floating>เบอร์มือถือ</ion-label>
+                        <ion-input type="text" value="{{data?.EMPL_MOBI}}" [(ngModel)]="insertData[0].EMPL_MOBI" [ngModelOptions]="{standalone: true}"></ion-input>
+                      </ion-item>
+                      
+                      <ion-item>
+                          <ion-icon name="ios-mail-outline" item-start></ion-icon>
+                          <ion-label floating>อีเมลล์</ion-label>
+                          <ion-input type="text" value="{{data?.EMPL_EMAI}}" [(ngModel)]="insertData[0].EMPL_EMAI" [ngModelOptions]="{standalone: true}"></ion-input>
+                        </ion-item>
+
+                        <div padding>
+                          <button ion-button color="primary" block (click)="show_inbound(2)">บันทึก</button>
+                        </div>
+
+            </ion-list>
+
+            <ion-list *ngSwitchCase="'bank'">
+                <ion-item>
+                    <ion-icon class="thbanks thbanks-{{data?.BANK_CODE | lowercase}}" aria-hidden="true" item-start></ion-icon>
+                      <ion-label floating>ชื่อธนาคาร</ion-label>
+                      <ion-select [(ngModel)]="insertData[0].BANK_CODE" [ngModelOptions]="{standalone: true}">
+                          <ion-option value="BAY">ธนาคารกรุงศรีอยุธยา</ion-option>
+                          <ion-option value="BBL">ธนาคารกรุงเทพ</ion-option>
+                          <ion-option value="CITI">ธนาคารซิตี้แบงค์</ion-option>
+                          <ion-option value="GHB">ธนาคารอาคารสงเคราะห์</ion-option>
+                          <ion-option value="GSB">ธนาคารออมสิน</ion-option>
+                          <ion-option value="KBK">ธนาคารกสิกรไทย</ion-option>
+                          <ion-option value="KTB">ธนาคารกรุงไทย</ion-option>
+                          <ion-option value="TNC">ธนาคารธนชาต</ion-option>
+                          <ion-option value="SCB">ธนาคารไทยพาณิชย์</ion-option>
+                          <ion-option value="TMB">ธนาคารทหารไทย</ion-option>
+                          <ion-option value="BAC">ธนาคารเพื่อการเกษตรและสหกรณ์</ion-option>
+                          <ion-option value="KIATNAKIN">ธนาคารเกียรตินาคิน</ion-option>
+                          <ion-option value="LHBANK">ธนาคารแลนด์แอนด์เฮาส์</ion-option>
+                          <ion-option value="TISCO">ธนาคารทิสโก้</ion-option>
+                          <ion-option value="UOB">ธนาคารยูโอบี</ion-option>
+                          <ion-option value="SCNB">ธนาคารสแตนดาร์ดชาร์เตอร์</ion-option>
+                        </ion-select>
+                      <!-- <ion-input type="text" value="{{data?.BANK_CODE}}"></ion-input> -->
+                    </ion-item>
+            
+                    <ion-item>
+                      <ion-icon name="ios-card" item-start></ion-icon>
+                        <ion-label floating>เลขที่บัญชี</ion-label>
+                        <ion-input type="text" value="{{data?.EMPL_ACCO}}" [(ngModel)]="insertData[0].EMPL_ACCO" [ngModelOptions]="{standalone: true}"></ion-input>
+                      </ion-item>
+                      <div padding>
+                        <button ion-button color="primary" block (click)="show_inbound(8)">บันทึก</button>
+                      </div>
+                    
+            </ion-list>
+
+</div>
+       <!-- <div padding>
+    <button ion-button color="primary" block (click)="show_inbound()">บันทึก</button>
+  </div> -->
+  </ion-list>
+
+
+
+</ion-content>

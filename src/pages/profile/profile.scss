@@ -1,0 +1,48 @@
+page-profile {
+    .bg{
+        background-image: url('../assets/logo.png');
+        // background-image: url('../assets/img/sti.gif');
+        background-repeat:space;
+        height: 200px;
+        background-size: cover;
+        filter: blur(5px);
+        background-position: center center;
+    }
+    .main-cnt{
+        width: 100%;
+        height: 200px;
+        padding:20px; 
+    }
+    .dp{
+        border-radius: 50%;
+        height: 125px;
+        width: 125px;
+        z-index: 10;
+        margin-top:-90px;
+        // margin-bottom: 40px;
+        position: relative;
+        left:50%;
+        margin-right:-50%;
+        transform: translate(-50%,-50%);
+        box-shadow: -6px 15px 81px 3px rgba(0,0,0,0.75);
+        align-content: center;
+    }
+    ion-list ion-item{
+        color:red;
+        background-color: #ecf0f1;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        align-content: center;
+    }
+    ion-icon {
+        color: #488aff;
+    }
+
+    .button{
+        font-size: 10.5px;
+        font-weight: bold;
+    }
+    .col{
+        text-align: center
+    }
+}

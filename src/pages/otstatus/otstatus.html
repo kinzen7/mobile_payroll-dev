@@ -1,0 +1,102 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button (click)="closemodal()">
+        <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">รายการคำขอ</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list-header style="background-color: #f0eff5;">
+    รายการที่รออนุมัติ
+  </ion-list-header>
+
+  <div *ngFor="let data of datas" (click)="clickItem(data)">
+    <ion-item *ngIf="data.ot_stat == 'W'">
+      <ion-row>
+        <ion-col col-3>
+          <ion-icon name="md-alarm" style="font-size: 40px;color: #48adff;"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <h6>วันเริ่มต้น {{data?.ot_startdate}}</h6>
+            </ion-col>
+            <ion-col>
+              <h6>วันสิ้นสุด {{data?.ot_enddate}}</h6>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>เวลา {{data?.ot_starttime}} - {{data?.ot_endtime}} น.</h6>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+
+  <ion-list-header style="background-color: #f0eff5;">
+    รายการที่อนุมัติแล้ว
+  </ion-list-header>
+  <div *ngFor="let data of datas" (click)="clickItem(data)">
+    <ion-item *ngIf="data.ot_stat == 'A'">
+      <ion-row>
+        <ion-col col-3>
+          <ion-icon name="md-checkmark-circle" style="font-size: 50px;color: #0b9408;"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <h6>วันเริ่มต้น {{data?.ot_startdate}}</h6>
+            </ion-col>
+            <ion-col>
+              <h6>วันสิ้นสุด {{data?.ot_enddate}}</h6>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>เวลา {{data?.ot_starttime}} - {{data?.ot_endtime}} น.</h6>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+  <ion-list-header style="background-color: #f0eff5;">
+    รายการที่ถูกปฏิเสธ
+  </ion-list-header>
+  <div *ngFor="let data of datas" (click)="clickItem(data)">
+    <ion-item *ngIf="data.ot_stat == 'R'">
+      <ion-row>
+        <ion-col col-3>
+          <ion-icon name="md-close-circle" style="font-size: 50px;color: #d75a4a;"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <h6>วันเริ่มต้น {{data?.ot_startdate}}</h6>
+            </ion-col>
+            <ion-col>
+              <h6>วันสิ้นสุด {{data?.ot_enddate}}</h6>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>เวลา {{data?.ot_starttime}} - {{data?.ot_endtime}} น.</h6>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+</ion-content>

@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title class="toolbar-title-ios">
+      <p style="color: #ffffff;">รายละเอียด</p>
+    </ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-arrow-round-back" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item style="padding-left: 0px;border-top-width: 0px;">  
+      <ion-row style=" text-align:center;">
+          <ion-col col-6 style="text-align: right;">             
+           <p>ขอ:</p>
+          </ion-col>
+          <ion-col col-6 style="text-align: left;">             
+           <p style="color:#333;">{{detailData.LEAV_TNAM}}</p>
+          </ion-col>
+        </ion-row>         
+    <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+       <p>วันที่:</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+       <p style="color:#333;">{{detailData.LEAV_FROM_DISP * 1000 | date:'dd/MM/yyyy'}}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style=" text-align:center;">
+        <ion-col col-6 style="text-align: right;">             
+         <p>ถึงวันที่:</p>
+        </ion-col>
+        <ion-col col-6 style="text-align: left;">             
+         <p style="color:#333;">{{detailData.LEAV_TO_DISP * 1000 | date:'dd/MM/yyyy'}} </p>
+        </ion-col>
+      </ion-row>
+
+    <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+       <p>เป็นเวลา:</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+       <p style="color:#333;">{{detailData.NOOF_DAYS}} วัน {{detailData.NOOF_HOUR =='' ? '0' : detailData.NOOF_HOUR}} ชั่วโมง</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+      <p>เหตุผล:</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+      <p style="color:#333;">{{detailData.LEAV_NOTE}}</p>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+       <p>รวม</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+       <p style="color:#333;">4 ชั่วโมง</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+       <p>เพิ่มรายการวันที่</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+       <p style="color:#333;">{{detailData.ot_time_stamp}}</p>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row style=" text-align:center;">
+      <ion-col col-6 style="text-align: right;">             
+       <p>สถานะ</p>
+      </ion-col>
+      <ion-col col-6 style="text-align: left;">             
+       <p style="color:#333;">{{detailData.STATUS == '1' ? 'รออนุมัติ' : detailData.STATUS == '2' ? 'อนุมัติแล้ว' : 'ถูกปฏิเสธ'}}</p> <!--{{detailData.ta_stat == 'W' ? 'รออนุมัติ' : detailData.ta_stat == 'A' ? 'อนุมัติแล้ว' : 'ถูกปฏิเสธ'}}-->
+      </ion-col>
+    </ion-row> 
+  </ion-item>
+
+       
+ 
+             
+      <!-- <ion-item style="padding-left: 0px;"> 
+        <p style="font-size: 18px;">สถานะ</p>
+
+          <ion-row> 
+            <ion-col col-3> <p> ผู้อนุมัติ </p> </ion-col>                      
+            <ion-col> <p style="color:#333;"> ฝ่ายบุคคล </p> </ion-col>           
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-3>  </ion-col>  
+            <ion-col> <p style="color:#333;">นางสาวแสนดี ที่สุด</p></ion-col>
+          </ion-row>  
+
+      </ion-item> -->
+
+      <div *ngIf='detailData.STATUS == "1"'>
+        <!-- <div [hidden]="!statusClick"> -->
+          <ion-row>
+            <p style="color:red;font-size: 18px;">* </p> <p style="font-size: 18px;">ยกเลิกคำขอลา</p>
+          </ion-row>
+          <ion-textarea placeholder="กรุณากรอกเหตุผลในการขอยกเลิก" style="margin-left: 20px;"></ion-textarea>
+        <!-- </div> -->
+
+        <div style="text-align:center;"> 
+            <button ion-button color="danger" style="width: 232px;height: 40px;" (click)="showConfirm()">ยกเลิกรายการ</button> 
+        </div>
+      </div>
+
+  </ion-list>
+</ion-content>

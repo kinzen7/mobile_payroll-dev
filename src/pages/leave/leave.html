@@ -1,0 +1,343 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="ios-arrow-back" style="color: #ffffff;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title style="text-align:center;">
+
+        ส่งคำขอลา
+    </ion-title>
+  </ion-navbar>
+
+<!-- ************************** -->
+<ion-toolbar no-border-top>         
+  <ion-segment [(ngModel)]="menu" (ionChange)="load_query()">                
+        <ion-segment-button value="request">
+          ส่งคำขอลา
+        </ion-segment-button>                
+        <ion-segment-button value="status">
+          สถานะคำขอ
+        </ion-segment-button>
+        <!-- <ion-segment-button value="cancel">
+          ยกเลิกคำขอ
+        </ion-segment-button> -->
+        <ion-segment-button value="approve" *ngIf=isManagement>
+          คำขอถึงคุณ
+        </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+
+</ion-header>
+
+
+<ion-content padding>
+<div [ngSwitch]="menu">  
+   
+    <ion-list *ngSwitchCase="'request'">  
+             <P style="margin-bottom: 0px;margin-top: 0px;">ประเภทการลา</P>
+        <ion-item>
+          <div class="alert-head">
+            <h2 class="alert-title" id="alert-hdr-1">ประเภทการลา</h2>
+            <ion-label>ประเภทการลา</ion-label>
+          </div>
+    
+          <ion-select [(ngModel)]="insertData.leave_code" (ngModelChange)="display_btn0()" placeholder="เลือกประเภทารลาของคุณ"><!---(ngModelChange)="checkleave()"-->
+            <div *ngFor="let data of leave_type">
+            <ion-option value="{{data.LEAVE_CODE}}">{{data.TNAME}}</ion-option>
+          </div>
+          </ion-select>
+        </ion-item>
+        <ion-item (click)="display_btn()" *ngIf='enable_btn0'>
+            <div class="row">
+                <div class="col">
+                  <label class="item item-icon-left item-radio" style="border: none">
+                    <input type="radio" name="group" [(ngModel)]="insertData.half_dayy" value="ALL" (click)="prepare_data_all()"> ทั้งวัน
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                </div>
+
+                <div class="col">
+                    <label class="item item-icon-left item-radio" style="border: none">
+                      <input type="radio" name="group" [(ngModel)]="insertData.half_dayy" value="" (click)="prepare_data_custom()"> กำหนดเอง
+                      <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                  </div>
+
+                <!-- <div class="col">
+                  <label class="item item-icon-left item-radio" style="border: none">
+                    <input type="radio" name="group" [(ngModel)]="insertData.half_dayy" value="AM" (click)="prepare_data_half()"> ครึ่งเช้า
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                </div>
+
+                <div class="col">
+                  <label class="item item-icon-left item-radio" style="border: none">
+                    <input type="radio" name="group" [(ngModel)]="insertData.half_dayy" value="PM" (click)="prepare_data_half()"> ครึ่งบ่าย
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                </div> -->
+                
+              </div>
+        </ion-item>  
+        
+        <div *ngIf='enable_btn'> <!--- ENABLE BUTTON-->
+
+      <ion-item *ngIf='insertData.half_dayy == "ALL"'>
+        <ion-label style="float:left">
+          <ion-icon name="md-calendar"></ion-icon>
+        </ion-label>
+        <ion-input disabled="false" placeholder='ระบุช่วงวันที่ลา' (click)="openCalendar_multi()" value="{{message_date}}"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf='insertData.half_dayy != "ALL"'>
+        <ion-label style="float:left">
+          <ion-icon name="md-calendar"></ion-icon>
+        </ion-label>
+        <ion-input disabled="false" placeholder='ระบุวันที่ลา' value="{{message_date}}"  (click)="openCalendar()" ></ion-input>
+      </ion-item>
+
+         <ion-item *ngIf='insertData.half_dayy != "ALL"'>
+          <ion-label style="float:left">
+            <ion-icon name="time"></ion-icon>
+          </ion-label><ion-label>จากเวลา</ion-label>
+          <ion-input disabled="false" placeholder='จากเวลา' type="time" pickerFormat="HH.mm" [(ngModel)]="insertData.time_from"></ion-input>
+        </ion-item>
+        
+        <ion-item *ngIf='insertData.half_dayy != "ALL"'>
+            <ion-label style="float:left">
+              <ion-icon name="time"></ion-icon>
+            </ion-label><ion-label>ถึงเวลา</ion-label>
+            <ion-input disabled="false" placeholder='จากเวลา' pickerFormat="HH.mm"  type="time" [(ngModel)]="insertData.time_to"></ion-input>
+          </ion-item>
+
+      <!-- <ion-item *ngIf='insertData.half_dayy != "ALL"'>
+        <ion-label>
+          <ion-icon name="time"></ion-icon>
+        </ion-label>
+        <ion-input type="number" min="0" max="8" step="0.01"  side="left" placeholder="จำนวนขั่วโมง" [(ngModel)]="insertData.noof_hour"></ion-input>
+      </ion-item> -->
+      <ion-item *ngIf='insertData.half_dayy == "ALL"'>
+        <ion-label>
+          <ion-icon name="time"></ion-icon>
+        </ion-label>
+        <ion-input type="number" min="1" max="8" step="1"  side="left" placeholder="จำนวนวัน" [(ngModel)]="insertData.noof_days"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="chatbubbles"></ion-icon>
+        </ion-label>
+        <ion-input type="text"  placeholder="หมายเหตุ" [(ngModel)]="insertData.leave_note"></ion-input>
+      </ion-item>
+      
+      
+      <!-- <ion-grid>
+        
+        <ion-row>
+          <ion-col col-6 *ngIf="photos; let id = index">
+            <ion-card class="releative">
+              <ion-icon ios="ios-add-circle" md="md-add-circle" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+              <img [src]="photos" />
+            </ion-card>
+          </ion-col>
+
+
+
+        </ion-row>
+      </ion-grid>
+      <div style="text-align:center;">
+        <button ion-button color="dark" style="width: 232px;height: 40px;margin-top: 30px;" (click)="takePhoto()">เพิ่มรูป</button>
+      </div> -->
+
+      <!-- <ion-row>
+          <ion-col width-50 offset-25 style="text-align: center">
+              <button ion-button icon-right (click)="upload()" >
+                  UPLOAD IMAGE
+                  <ion-icon name="mail"></ion-icon>
+                </button>
+          </ion-col>
+        </ion-row> -->
+
+<!-- SORRASHUT -->
+        <!-- <button ion-button full (click)="takePhoto()" >
+            <ion-icon name="camera"></ion-icon>Take Photo
+            </button>
+          
+            <ion-grid>
+              <ion-row>
+                  <ion-col col-6 *ngFor="let photo of photos; let id = index">
+                      <ion-card class="releative">
+                          <ion-icon ios="ios-add-circle" md="md-add-circle" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                        <img [src]="photo" *ngIf="photo" />
+                      </ion-card>
+              </ion-col>
+              
+              </ion-row>
+            </ion-grid> -->
+
+
+
+      <ion-row>
+          <ion-col width-50 offset-25 style="text-align: center">
+              <button ion-button icon-right (click)="showConfirm()" >
+                  ส่ง
+                  <ion-icon name="mail"></ion-icon>
+                </button>
+          </ion-col>
+        </ion-row>
+      </div> <!--- ENABLE BUTTON-->
+    </ion-list>
+    
+    <ion-list *ngSwitchCase="'status'">
+        <p style="color:#d75a4a;margin-bottom: 10px;margin-top: 10px; margin-left: 16px;font-size: 10px;">
+            * ข้อมูลย้อนหลังไม่เกิน 1 เดือน
+          </p>
+      <ion-list-header style="background-color: #f0eff5;">
+        รายการที่รออนุมัติ
+      </ion-list-header>
+    
+      <div *ngFor="let data of datas_waiting" (click)="clickItem(data)">
+        <ion-item >
+          <ion-row>
+            <ion-col col-3>
+              <ion-icon name="md-alarm" style="font-size: 80px;color: #48adff;"></ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-col>
+                      <h6><u>ขอ {{data?.LEAV_TNAM}}</u></h6>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                          <h6>วันที่ {{data.LEAV_FROM_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                        </ion-col>
+                        <ion-col>
+                            <h6>ถึง {{data.LEAV_TO_DISP * 1000 | date:'dd/MM/yyyy'}} </h6>
+                          </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <h6>เป็นเวลา {{data.NOOF_DAYS == '' ? '0' : data.NOOF_DAYS}} วัน {{data.NOOF_HOUR =='' ? '0' : data.NOOF_HOUR}} ชั่วโมง</h6>
+                    </ion-col>
+                  </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+    
+    
+      <ion-list-header style="background-color: #f0eff5;">
+        รายการที่อนุมัติแล้ว
+      </ion-list-header>
+      <div *ngFor="let data of datas_approved" (click)="clickItem(data)">
+        <ion-item >
+          <ion-row>
+            <ion-col col-3>
+              <ion-icon name="md-alarm" style="font-size: 80px;color: #008000;"></ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-col>
+                      <h6><u>ขอ {{data?.LEAV_TNAM}}</u></h6>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col> 
+                          <h6>วันที่ {{data.LEAV_FROM_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                        </ion-col>
+                        <ion-col>
+                            <h6>ถึง {{data.LEAV_TO_DISP * 1000 | date:'dd/MM/yyyy'}} </h6>
+                          </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <h6>เป็นเวลา {{data.NOOF_DAYS == '' ? '0' : data.NOOF_DAYS}} วัน {{data.NOOF_HOUR =='' ? '0' : data.NOOF_HOUR}} ชั่วโมง</h6>
+                    </ion-col>
+                  </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+    
+      <ion-list-header style="background-color: #f0eff5;">
+        รายการที่ถูกปฏิเสธ
+      </ion-list-header>
+      <div *ngFor="let data of datas_reject" (click)="clickItem(data)">
+        <ion-item >
+          <ion-row>
+            <ion-col col-3>
+              <ion-icon name="md-alarm" style="font-size: 80px;color: #ae0718;"></ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-row>
+                    <ion-col>
+                      <h6><u>ขอ {{data?.LEAV_TNAM}}</u></h6>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                          <h6>วันที่ {{data.LEAV_FROM_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                        </ion-col>
+                        <ion-col>
+                            <h6>ถึง {{data.LEAV_TO_DISP * 1000 | date:'dd/MM/yyyy'}} </h6>
+                          </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <h6>เป็นเวลา {{data.NOOF_DAYS == '' ? '0' : data.NOOF_DAYS}} วัน {{data.NOOF_HOUR =='' ? '0' : data.NOOF_HOUR}} ชั่วโมง</h6>
+                    </ion-col>
+                  </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+
+ 
+
+    </ion-list>
+
+    
+
+
+    <ion-list *ngSwitchCase="'approve'">
+        <div *ngFor="let data of reqe_datas" (click)="leave_admin(data)">
+            <ion-item *ngIf="data.STATUS == '1'">
+              <ion-row>
+                <ion-col col-3>
+                    <img src="http://payroll.ahost-cs.com/uploads/{{data?.MOBI_SEQE}}.jpg" onError="this.src='assets/img/no-image.jpg'">
+                </ion-col>
+                <ion-col>
+                <ion-row>
+                    <ion-col>
+                      <h6>จาก {{data?.TFST_NAME}} {{data?.TLST_NAME}}</h6>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                          <h6>วันที่ {{data.LEAV_FROM_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                        </ion-col>
+                        <ion-col>
+                            <h6>ถึง {{data.LEAV_TO_DISP * 1000 | date:'dd/MM/yyyy'}}</h6>
+                          </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <h6>ขอลา {{data?.LEAV_TNAM}}</h6>
+                    </ion-col>
+                  </ion-row>
+            </ion-col>
+              </ion-row>
+            </ion-item>
+          </div>
+
+          <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage">
+              <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+            </ion-infinite-scroll> -->
+    </ion-list>
+  
+</div>
+</ion-content>

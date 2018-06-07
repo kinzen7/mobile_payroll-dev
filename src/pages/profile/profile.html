@@ -1,0 +1,53 @@
+<ion-header >
+  <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="ios-arrow-back" style="color: #ffffff;"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title style="text-align:center;">
+
+      ข้อมูลส่วนตัว
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content parallax>
+  <div class="bg">
+  </div>
+
+  <div class="main-cnt">
+    <img src="{{'data:image/png;base64,' + imgAvatar}}" onError="this.src='assets/img/no-image.jpg'" class="dp">
+    <ion-list no-lines>
+        <ion-item>
+          <ion-icon name="ios-contact" item-start></ion-icon>
+          {{tname}}
+          <!-- {{ename}} -->
+        </ion-item>
+        <ion-item>
+          <ion-icon name="ios-mail" item-start></ion-icon>
+          {{email}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="ios-people" item-start></ion-icon>
+          {{payr_grop}}
+        </ion-item>
+      </ion-list>
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+                <button ion-button icon-right (click)="open_editprofile_page()" style="width: 150px;">
+                    แก้ไขข้อมูลส่วนตัว
+                    <ion-icon style="color:white;" name="md-build" item-start></ion-icon>
+                  </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-right (click)="open_updatetax_page()" style="width: 150px;">
+                    แก้ไขข้อมูลลดหย่อนภาษี
+                    <ion-icon style="color:white;" name="md-build" item-start></ion-icon>
+                  </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+</ion-content>

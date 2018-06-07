@@ -1,0 +1,192 @@
+
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title style="text-align: center;">
+      Update TAX
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="choice">
+      <ion-segment-button value="puppies">
+        ผู้มีเงินได้
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        คู่สมรส
+      </ion-segment-button>
+      <ion-segment-button value="ducklings">
+        ลดหย่อนอื่นๆ
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="choice">
+    <ion-list *ngSwitchCase="'puppies'">
+      <ion-card>
+      <ion-item>
+        <ion-label>พิมพ์ ภ.ง.ด.91</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>หักลดหย่อนคู่สมรสมีชีวิตอยู่และไม่มีเงินได้</ion-label>
+        <ion-checkbox ></ion-checkbox>
+      </ion-item>
+    </ion-card>
+    <ion-card> <!-- ลดหย่อนบุตร -->
+        <ion-item-group>
+            <ion-item-divider color="light"  (click)="onButtonClick()">ลดหย่อนบุตร (คนละ 30,000 บาท)</ion-item-divider>
+            <ion-item *ngIf="buttonClicked">
+                <ion-label>บุตรคนที่1: </ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="buttonClicked">
+                  <ion-label>บุตรคนที่2: </ion-label>
+                  <ion-input type="text"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <ion-label>บุตรคนที่3: </ion-label>
+                    <ion-input type="text"></ion-input>
+                  </ion-item>
+          </ion-item-group>
+                    </ion-card>
+
+                    <ion-card> <!-- ลดหย่อนบิดา/มารดา -->
+                      <ion-item-group>
+                          <ion-item-divider color="light"  (click)="onButtonClick()">ลดหย่อนบิดา/มารดา</ion-item-divider>
+                          <ion-item *ngIf="buttonClicked">
+                              <ion-label>บุตรคนที่1: </ion-label>
+                              <ion-input type="text" placeholder="เลขบัตรประชาขน"></ion-input>
+                            
+                           
+                                <ion-label>บุตรคนที่2: </ion-label>
+                                <ion-input type="text" placeholder="เลขบัตรประชาขน"></ion-input>
+                              
+                              
+                                  <ion-label>บุตรคนที่3: </ion-label>
+                                  <ion-input type="text" placeholder="เลขบัตรประชาขน"></ion-input>
+
+                                  <ion-label>บุตรคนที่4: </ion-label>
+                                  <ion-input type="text" placeholder="เลขบัตรประชาขน"></ion-input>
+
+                                  <ion-label>บุตรคนที่5: </ion-label>
+                                  <ion-input type="text" placeholder="เลขบัตรประชาขน"></ion-input>
+                                </ion-item>
+                        </ion-item-group>
+                                  </ion-card>
+
+
+                                  <ion-card> <!-- ประกัน, LTF, RMF, บริจาค -->
+                                    <ion-item-group>
+                                        <ion-item-divider color="light"  (click)="onButtonClick()">ประกัน, LTF, RMF, บริจาค</ion-item-divider>
+                                        <ion-item *ngIf="buttonClicked">
+                                            <ion-label>บุตรคนที่1: </ion-label>
+                                            <ion-input type="text"></ion-input>
+                                          </ion-item>
+                                          <ion-item *ngIf="buttonClicked">
+                                              <ion-label>บุตรคนที่2: </ion-label>
+                                              <ion-input type="text"></ion-input>
+                                            </ion-item>
+                                            <ion-item *ngIf="buttonClicked">
+                                                <ion-label>บุตรคนที่3: </ion-label>
+                                                <ion-input type="text"></ion-input>
+                                              </ion-item>
+                                      </ion-item-group>
+                                                </ion-card>
+
+                                                <ion-card> <!-- เงินสะสมกองทุน, ประกันสังคม, ดอกเบี้ย -->
+                                                  <ion-item-group>
+                                                      <ion-item-divider color="light"  (click)="onButtonClick()">เงินสะสมกองทุน, ประกันสังคม, ดอกเบี้ย</ion-item-divider>
+                                                      <ion-item *ngIf="buttonClicked">
+                                                          <ion-label>บุตรคนที่1: </ion-label>
+                                                          <ion-input type="text"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item *ngIf="buttonClicked">
+                                                            <ion-label>บุตรคนที่2: </ion-label>
+                                                            <ion-input type="text"></ion-input>
+                                                          </ion-item>
+                                                          <ion-item *ngIf="buttonClicked">
+                                                              <ion-label>บุตรคนที่3: </ion-label>
+                                                              <ion-input type="text"></ion-input>
+                                                            </ion-item>
+                                                    </ion-item-group>
+                                                              </ion-card>  
+                                                              
+                                                              <ion-card> <!-- อุปการะเลี้ยงดู -->
+                                                                <ion-item-group>
+                                                                    <ion-item-divider color="light"  (click)="onButtonClick()">อุปการะเลี้ยงดู</ion-item-divider>
+                                                                    <ion-item *ngIf="buttonClicked">
+                                                                        <ion-label>บุตรคนที่1: </ion-label>
+                                                                        <ion-input type="text"></ion-input>
+                                                                      </ion-item>
+                                                                      <ion-item *ngIf="buttonClicked">
+                                                                          <ion-label>บุตรคนที่2: </ion-label>
+                                                                          <ion-input type="text"></ion-input>
+                                                                        </ion-item>
+                                                                        <ion-item *ngIf="buttonClicked">
+                                                                            <ion-label>บุตรคนที่3: </ion-label>
+                                                                            <ion-input type="text"></ion-input>
+                                                                          </ion-item>
+                                                                  </ion-item-group>
+                                                                            </ion-card>  
+
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'kittens'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-kitten-3.jpg">
+        </ion-thumbnail>
+        <h2>Milo</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-kitten-4.jpg">
+        </ion-thumbnail>
+        <h2>Bandit</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-kitten-2.jpg">
+        </ion-thumbnail>
+        <h2>Nala</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'ducklings'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-1.jpg">
+        </ion-thumbnail>
+        <h2>Daffy</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-2.jpg">
+        </ion-thumbnail>
+        <h2>Huey</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-3.jpg">
+        </ion-thumbnail>
+        <h2>Dewey</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-4.jpg">
+        </ion-thumbnail>
+        <h2>Louie</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

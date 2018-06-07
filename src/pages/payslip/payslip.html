@@ -1,0 +1,160 @@
+<ion-header>
+
+    <ion-navbar hideBackButton>
+        <ion-item-sliding>
+            <ion-item color="none" id="profile-list-item7">
+              <ion-avatar item-left>
+              
+                <img src="{{'data:image/png;base64,' + imgAvatar}}" onError="this.src='assets/img/no-image.jpg'">
+                
+              </ion-avatar>
+              <p style="margin-top:0px;color:#000000;font-size: 15px;">{{tname}}</p>
+              <p style="margin-top:0px;color:#ac9e9e;font-size: 15px;">{{email}}</p>
+              <p style="margin-top:0px;color:#ac9e9e;font-size: 15px;">{{payr_grop}}</p>
+            </ion-item>
+            <ion-item-options side="left">
+              <button ion-button color="positive"></button>
+              <button ion-button color="positive"></button>
+            </ion-item-options>
+          </ion-item-sliding>
+    </ion-navbar>
+    
+  </ion-header>
+  <ion-content>
+
+      <ion-item>
+
+          <ion-label>
+              <ion-icon name="md-calendar"></ion-icon>
+            </ion-label>
+            <ion-input disabled="false" placeholder={{date_disp}} (click)="openCalendar()" value="{{period}}"></ion-input>
+          <!-- <ion-label>
+              <ion-icon name="md-calendar"></ion-icon>
+            </ion-label>
+            <ion-input disabled="false" placeholder={{date}} (click)="showCalendar()"></ion-input> -->
+          <!-- <ion-datetime placeholder="เลือกงวดที่ต้องการ" displayFormat="MMMM YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="period" style="font-size:14px;" (ngModelChange)="request_payslip()"> -->
+          <!-- </ion-datetime> -->
+        </ion-item>
+
+       
+    <ion-card>
+        <div *ngIf=cdate>
+            <div *ngIf=!cdata><ion-card-header style="color:red;font-style: italic;">*ไม่พบข้อมูลในวันที่เลือก</ion-card-header></div>
+          <div *ngIf=cdata>
+        <ion-item (click)="func_explain_e()">
+            <ion-row text-center>
+              <ion-col style="text-align: left;">
+                  <ion-item-divider color="light"><u><h2 style="font-size:18px;">เงินได้</h2></u></ion-item-divider>
+                <!-- <h5 style="font-size:20px;">เงินได้</h5> -->
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <div *ngIf=explain_e>
+
+          
+
+          <div *ngIf="datas?.length > 0">
+
+           <div *ngFor="let data of datas">
+          <ion-item *ngIf="data?.type == 'E'">
+              <ion-row text-center>
+                <ion-col style="text-align: left;">
+                  <h5 style="font-size:12px;">{{data?.detail}}</h5>
+                </ion-col>
+                <ion-col style="text-align: right;">
+                  <h5 style="color: #48adff;">{{data?.amount| number}} บาท</h5>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </div>
+          </div>
+
+        <ion-item>
+          <ion-row text-center>
+            <ion-col style="padding-left: 50px;">
+              <h5>
+                <b>รวมเงินได้</b>
+              </h5>
+            </ion-col>
+            <ion-col style="text-align: right;">
+              <h5 style="color: #48adff;">
+                <b>{{e| number}} บาท</b>
+              </h5>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+      <!-- <ion-item-divider>
+        
+      </ion-item-divider> -->
+      <ion-item (click)="func_explain_d()">
+        <ion-list>
+        <ion-row text-center>
+          <ion-col style="text-align: left;">
+            <!-- <h5 style="font-size:20px;">เงินหัก</h5> -->
+            <ion-item-divider color="light"><u><h2 style="font-size:18px;">เงินหัก</h2></u></ion-item-divider>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+      </ion-item>
+  
+      <div *ngIf=explain_d>
+      <div *ngIf="datas?.length > 0">
+
+          <div *ngFor="let data of datas">
+         <ion-item *ngIf="data?.type == 'D'">
+             <ion-row text-center>
+               <ion-col style="text-align: left;">
+                 <h5 style="font-size:12px;">{{data?.detail}}</h5>
+               </ion-col>
+               <ion-col style="text-align: right;">
+                 <h5 style="color: #ff4848;">{{data?.amount| number}} บาท</h5>
+               </ion-col>
+             </ion-row>
+           </ion-item>
+         </div>
+         </div>
+
+  
+      <ion-item>
+        <ion-row text-center>
+          <ion-col style="padding-left: 50px;">
+            <h5>
+              <b>รวมเงินหัก</b>
+            </h5>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <h5 style="color: #ff4848;">
+              <b>{{d| number}} บาท</b>
+            </h5>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+
+
+    <ion-item-divider>
+        
+      </ion-item-divider>
+
+      <div class="foot">
+        <ion-item>
+          <ion-row text-center>
+            <ion-col style="text-align: left;">
+              <h5  style="color:rgb(4, 160, 4);font-size:18px;">
+                <b>เงินสุทธิ</b>
+              </h5>
+            </ion-col>
+            <ion-col style="text-align: right;">
+              <h5 style="color:rgb(4, 160, 4);font-size:18px;">
+                <b>{{e-d| number}} บาท</b>
+              </h5>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+    </div>
+    </div>
+    </ion-card>
+  </ion-content>

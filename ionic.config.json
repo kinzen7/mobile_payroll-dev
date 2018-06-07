@@ -1,0 +1,8 @@
+{
+  "name": "Applever",
+  "app_id": "4b0d5d06",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

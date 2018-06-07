@@ -1,0 +1,23 @@
+{
+	"_comment":"Login Page",
+    "txt_email":"Email",
+	"txt_password":"Password",
+	"btn_loggin":"Login",
+	"btn_forgot_password":"Forgot Password?",
+	"btn_tutorial":" Manual",
+	"txt_change_lang":"Language",
+	
+	"_comment":"Home Page",
+	"btn_ta":"Time Attendent",
+	"btn_ot":"Over Time",
+	"btn_leave":"Leave",
+	"btn_service_rec":"Service Record",
+	"btn_allowance":"Allowance",
+	"btn_ann":"Announcement",
+	"btn_payslip":"Payslip",
+	"btn_report":"Report",
+	"btn_help":"Help",
+	
+    "title":"Setting",
+    "title2":"Leave"
+}

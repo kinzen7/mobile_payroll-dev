@@ -1,0 +1,136 @@
+<ion-header>
+
+  <ion-navbar hideBackButton (click)="open_profile()">
+      <ion-item-sliding>
+          <ion-item color="none" id="profile-list-item7">
+            <ion-avatar item-left>
+              <img src="{{'data:image/png;base64,' + imgAvatar}}" onError="this.src='assets/img/no-image.jpg'">
+            
+            </ion-avatar>
+            <p style="margin-top:0px;color:#000000;font-size: 15px;">สวัสดี {{tname}}</p>
+            <p style="margin-top:0px;color:#ac9e9e;font-size: 15px;">{{email}}</p>
+            <p style="margin-top:0px;color:#ac9e9e;font-size: 15px;">{{payr_grop}}</p>
+          </ion-item>
+          <ion-item-options side="left">
+            <button ion-button color="positive"></button>
+            <button ion-button color="positive"></button>
+          </ion-item-options>
+        </ion-item-sliding>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content class="card-background-page">
+  <!-- <ion-card>
+      <ion-card-header style="background-color: #179ceb;"><div class="logo">
+          <img src="assets/logohrb2.png" />
+      </div>
+      <ion-card-content style="background-color: #179ceb;" id="welcome">
+              <p class="font">Welcome {{name}}</p>
+             </ion-card-content>
+      </ion-card-header>
+
+    </ion-card> -->
+    <ion-card>
+    <ion-grid>
+        <ion-row>
+
+          <ion-col >
+            <ion-card style="width: auto; height: auto;">
+            <img src="assets/img/time-management.png" style="width: auto; height: 65px;"/>
+            <!--<div class="card-title">TA</div>-->
+            <!--<div class="card-subtitle">(เข้า-ออกงาน)</div>-->
+            <B><p style="font-size:12px;">{{'btn_ta' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          
+          <ion-col (click)="open_ot()">
+          <ion-card style="width: auto; height: auto;">
+            <img src="assets/img/24-hours.png" style="width: auto; height: 65px;"/>
+           <!-- <div class="card-title">OT Request</div>-->
+           <!--  <div class="card-subtitle">(ส่งคำขอ OT)</div> -->
+          
+           <B> <p style="font-size:12px;">{{'btn_ot' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          <ion-col (click)="open_leave()">
+            <ion-card style="width:  auto; height: auto;">
+            <img src="assets/img/calendar.png" style="width: auto; height: 65px;"/>
+            <!--<div class="card-title">LEAVE</div>
+            <div class="card-subtitle">(ส่งคำขอลา)</div>-->
+            <B><p style="font-size:12px;">{{'btn_leave' | translate}}</p></B>
+            </ion-card>
+          </ion-col>
+          </ion-row>
+          </ion-grid>
+          
+          <ion-grid>
+                <ion-row>
+          
+          <ion-col (click)="open_service()">
+          <ion-card style="width:  auto; height: auto;">
+          <img src="assets/img/vehicles.png" style="width: auto; height: 65px;"/>
+          <!--<div class="card-title">Service Record</div>
+          <div class="card-subtitle">(ปฏิบัติงานนอกสถานที่)</div>-->
+          <B><p style="font-size:12px;">{{'btn_service_rec' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          
+          
+          <ion-col (click)="open_profile()">
+          <ion-card style="width:  auto; height: auto;">
+          <img src="assets/img/man.png" style="width: auto; height: 65px;"/>
+          <!--<div class="card-title">Profile My Account</div>
+          <div class="card-subtitle">(Update ลดหย่อน)</div>-->
+          <B><p style="font-size:12px;">{{'btn_allowance' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          
+          <ion-col >
+          <ion-card style="width: auto; height: auto;">
+          <img src="assets/img/megaphone.png" style="width: auto; height: 65px;"/>
+          <!-- <div class="card-title">Announce</div>
+          <div class="card-subtitle">(ประกาศบริษัท)</div>-->
+          <B> <p style="font-size:12px;">{{'btn_ann' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          </ion-row>
+          </ion-grid>
+          
+          <ion-grid>
+          <ion-row>
+          
+          <ion-col (click)="open_payslip()">
+          <ion-card style="width:  auto; height: auto;">
+          <img src="assets/img/cash.png" style="width: auto; height: 65px;"/>
+          <!--<div class="card-title">PaySlip</div>
+          <div class="card-subtitle">(ข้อมูลเงินเดือน)</div>-->
+          <B><p style="font-size:12px;">{{'btn_payslip' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          <ion-col>
+          <ion-card style="width:  auto; height: auto;">
+          <img src="assets/img/report.png" style="width: auto; height: 65px;"/>
+          <!-- <div class="card-title">Report Online</div>
+          <div class="card-subtitle">(รายงานออนไลน์)</div>-->
+          <B><p style="font-size:12px;">{{'btn_report' | translate}}</p></B>
+          </ion-card>
+          </ion-col>
+          
+          <ion-col >
+          <ion-card style="width: auto; height: auto;">
+          <img src="assets/img/customer-service.png" style="width: auto; height: 65px;" />
+          <!--<div class="card-title">Request Help</div>
+          <div class="card-subtitle">(ความช่วยเหลือ)</div>-->
+          <B><p style="font-size:12px;">{{'btn_help' | translate}}</p> </B>
+          </ion-card>
+          </ion-col>
+          </ion-row>
+          </ion-grid>
+          </ion-card>
+          </ion-content>

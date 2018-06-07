@@ -1,0 +1,20 @@
+page-otrequest {
+    p{
+        margin-left: 13px;
+        font-size: 18px;        
+    }
+
+    .toolbar-title-ios {
+        text-align: center;
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: #fff;
+        pointer-events: auto;        
+    }
+
+    .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+        color: #ffffff !important;
+        background-color: transparent;
+    }
+
+}

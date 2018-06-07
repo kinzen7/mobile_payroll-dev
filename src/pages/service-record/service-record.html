@@ -1,0 +1,163 @@
+<ion-header>
+
+  <ion-navbar hideBackButton> 
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>  
+
+    <ion-title style="text-align: center;"> บันทึกการให้บริการ </ion-title>    
+  </ion-navbar> 
+  
+  <!-- ************************** -->
+ <ion-toolbar no-border-top>         
+    <ion-segment [(ngModel)]="menu">                
+          <ion-segment-button value="customer">
+            Customer
+          </ion-segment-button>                
+          <ion-segment-button value="detail">
+            รายละเอียด
+          </ion-segment-button>
+          <ion-segment-button value="signature">
+            Signature
+          </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="menu">  
+     
+      <ion-list *ngSwitchCase="'customer'">          
+          <ion-item>
+              <ion-label color="primary">Requset ID</ion-label>
+              <ion-input type="text" value="57160018" disabled>57160018</ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary" >วันที่บริการ</ion-label>
+              <ion-datetime displayFormat="จากวันที่ D MMMM YYYY" 
+                            pickerFormat="D MMM YYYY">
+              </ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary">ชื่อบริษัท/โปรเจค</ion-label>
+              <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary">Contact Person</ion-label>
+              <ion-input type="text"></ion-input>
+          </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'detail'">
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">A) Service Status</ion-label>
+            <ion-select [(ngModel)]="service-status">
+                <ion-option value="Completed">Completed</ion-option>
+                <ion-option value="Progress">In Progress, next action date:.......</ion-option>
+                <ion-option value="Wait">Wait Customer</ion-option>
+                <ion-option value="Pending">Pending</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">B) Type of Service</ion-label>
+            <ion-select [(ngModel)]="service-status">
+                <ion-option value="Application">Application Service</ion-option>
+                <ion-option value="System">System & Technical Service</ion-option>
+                <ion-option value="Implementation">Implementation</ion-option>
+                <ion-option value="SW">SW Development Service</ion-option>
+                <ion-option value="Upgrade">Upgrade/Migraration Service</ion-option>
+                <ion-option value="Setup">Setup/Installation Service</ion-option>
+                <ion-option value="Consulting">Consulting Service</ion-option>
+                <ion-option value="Preventive">Preventive Maintenance</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <h1 style="margin-top: 0px;" color="primary" style="font-size: 16px;"> C) Service Person(s) & Service Time</h1>
+        <!-- <div id="employee"> -->
+        <ion-item>                                                       
+            <ion-label color="primary" stacked style="font-size:16px;">ชื่อ-สกุล</ion-label>
+            <ion-select [(ngModel)]="employee">
+                <ion-option value="1">นายสรชัช แก้วถาวร</ion-option>
+                <ion-option value="2">นางสาววัทนวิภา เจริญสุข</ion-option>
+            </ion-select>                     
+        </ion-item>
+
+        <ion-row>
+            <ion-col col-6>          
+                <ion-item>
+                    <ion-label color="primary">เวลา</ion-label>
+                    <ion-datetime pickerFormat="HH:mm" [(ngModel)]="starttime"></ion-datetime>            
+                </ion-item>
+            </ion-col>
+  
+            <ion-col col-6>
+                <ion-item>
+                    <ion-label color="primary">ถึง</ion-label>
+                    <ion-datetime pickerFormat="HH:mm" [(ngModel)]="endtime"></ion-datetime>
+                </ion-item>
+            </ion-col>      
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-6>          
+                <ion-item>
+                    <ion-label color="primary">Normal</ion-label>
+                    <ion-datetime pickerFormat="HH:mm" [(ngModel)]="normaltime"></ion-datetime>            
+                </ion-item>
+            </ion-col>
+  
+            <ion-col col-6>
+                <ion-item>
+                    <ion-label color="primary">Extra</ion-label>
+                    <ion-datetime pickerFormat="HH:mm" [(ngModel)]="extratime"></ion-datetime>
+                </ion-item>
+            </ion-col>      
+        </ion-row>
+        <!-- </div> -->
+
+        <!-- <ion-icon name="md-add" (click)="addEmployee()" ></ion-icon> -->
+        
+
+
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">D) Service Charge</ion-label>
+            <ion-select [(ngModel)]="service-status">
+                <ion-option value="Project">Charge to Project</ion-option>
+                <ion-option value="Customer">Charge to Customer</ion-option>
+                <ion-option value="Free">Free of Charge</ion-option>
+                <ion-option value="Sales">Sales & Marketing Support</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">E) Description of Services</ion-label>
+            <ion-textarea>
+            </ion-textarea>            
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">F) Service Satisfaction Rating</ion-label>
+            <ion-select [(ngModel)]="service-status">
+                <ion-option value="Very">Very Dissatisfied</ion-option>
+                <ion-option value="Dissatisfied">Dissatisfied</ion-option>
+                <ion-option value="Acceptable">Acceptable</ion-option>
+                <ion-option value="Satisfied">Very Satisfied</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" stacked style="font-size:16px;">G) Customer's Comment</ion-label>
+            <ion-textarea>
+            </ion-textarea>            
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'signature'">
+      </ion-list>
+    
+  </div>
+
+</ion-content>
